@@ -45,12 +45,7 @@ const TabNavigator = createBottomTabNavigator({
   }
 );
 
-const switchNavigator = createSwitchNavigator({
-  WelcomeScreen:{screen: WelcomeScreen},
-  BottomTab:{screen: TabNavigator}
-})
-
-const AppDrawNavigator = createDrawerNavigator({
+export const AppDrawerNavigator = createDrawerNavigator({
   Home : {
     screen : TabNavigator
   },
@@ -63,6 +58,11 @@ const AppDrawNavigator = createDrawerNavigator({
 },
 {
   initialRouteName : 'Home'
+})
+
+const switchNavigator = createSwitchNavigator({
+  WelcomeScreen:{screen: WelcomeScreen},
+  Drawer : {screen: AppDrawerNavigator}
 })
 
 const AppContainer =  createAppContainer(switchNavigator);

@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import {StyleSheet, View, Text,TouchableOpacity} from 'react-native';
-import { DrawerItems} from 'react-navigation-drawer'
+import { DrawerItems} from 'react-navigation-drawer';
+import firebase from 'firebase';
 
 export default class CustomSideBarMenu extends React.Component{
     render(){
@@ -15,7 +16,7 @@ export default class CustomSideBarMenu extends React.Component{
                         this.props.navigation.navigate('WelcomeScreen');
                         firebase.auth().signOut();
                     }}>
-                        <Text>Log Out</Text>
+                        <Text style={styles.logOutText}>Log Out</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -33,16 +34,17 @@ var styles = StyleSheet.create({
     logOutContainer : {
       flex:0.2,
       justifyContent:'flex-end',
-      paddingBottom:30
+      paddingBottom:40
     },
     logOutButton : {
-      height:30,
+      height:40,
       width:'100%',
       justifyContent:'center',
-      padding:10
+      padding:10,
+      paddingLeft: 20
     },
     logOutText:{
-      fontSize: 30,
+      fontSize: 15,
       fontWeight:'bold'
     }
   })
