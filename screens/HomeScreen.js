@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, FlatList,TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, FlatList,TouchableOpacity, Alert } from 'react-native';
 import { ListItem } from 'react-native-elements'
 import MyHeader from '../components/MyHeader';
-
+import firebase from 'firebase';
 import db from '../config'
 
 export default class HomeScreen extends Component{
@@ -14,8 +14,20 @@ export default class HomeScreen extends Component{
   this.requestRef= null
   }
 
-  getAllRequests =()=>{
-    this.requestRef = db.collection("exchange_requests")
+  getAllRequests =async()=>{
+    //   try {
+    //     var allRequests = []
+    //     var requests = db.collection(exchange_requests).get().then((querySnapshot)=>{
+    //         querySnapshot.forEach((doc)=>{
+    //             allRequests.push(doc.data())
+    //         })
+    //         this.setState({allRequests})
+    //     })
+    //   } catch (error) {
+    //       Alert.alert("ERROR")
+    //   }
+      
+    this.requestRef = await db.collection("exchange_requests")
     .onSnapshot((snapshot)=>{
       var allRequests = []
       snapshot.forEach((doc) => {

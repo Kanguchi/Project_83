@@ -46,6 +46,7 @@ const TabNavigator = createBottomTabNavigator({
 );
 
 export const AppDrawerNavigator = createDrawerNavigator({
+  
   Home : {
     screen : TabNavigator
   },
