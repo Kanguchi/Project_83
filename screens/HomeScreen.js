@@ -14,20 +14,8 @@ export default class HomeScreen extends Component{
   this.requestRef= null
   }
 
-  getAllRequests =async()=>{
-    //   try {
-    //     var allRequests = []
-    //     var requests = db.collection(exchange_requests).get().then((querySnapshot)=>{
-    //         querySnapshot.forEach((doc)=>{
-    //             allRequests.push(doc.data())
-    //         })
-    //         this.setState({allRequests})
-    //     })
-    //   } catch (error) {
-    //       Alert.alert("ERROR")
-    //   }
-      
-    this.requestRef = await db.collection("exchange_requests")
+  getAllRequests =()=>{
+    this.requestRef = db.collection("exchange_requests")
     .onSnapshot((snapshot)=>{
       var allRequests = []
       snapshot.forEach((doc) => {
@@ -39,21 +27,20 @@ export default class HomeScreen extends Component{
 
   keyExtractor = (item, index) => index.toString()
 
-  renderItem = ( {item, i} ) =>{
-    console.log(item.item_name);
+  renderItem = ( {item} ) =>{
     return (
-      <ListItem
-        key={i}
-        title={item.item_name}
-        subtitle={item.description}
-        titleStyle={{ color: 'black', fontWeight: 'bold' }}
-        rightElement={
-            <TouchableOpacity style={styles.button}>
+      <ListItem bottomDivider>
+        <ListItem.Content>
+          <ListItem.Title style={{ color: 'black', fontWeight: 'bold' }}>{item.item_name}</ListItem.Title>
+          <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
+          <TouchableOpacity style={styles.button}
+          onPress={()=>{
+            this.props.navigation.navigate("ReceiverDetails",{"details": item})
+            console.log("this are items ",item.username)}}>
               <Text style={{color:'#ffff'}}>Exchange</Text>
-            </TouchableOpacity>
-          }
-        bottomDivider
-      />
+          </TouchableOpacity>
+        </ListItem.Content>
+      </ListItem>
     )
   }
 
@@ -95,6 +82,8 @@ const styles = StyleSheet.create({
   button:{
     width:100,
     height:30,
+    marginTop: -50,
+    marginLeft: 250,
     justifyContent:'center',
     alignItems:'center',
     backgroundColor:"#ff5722",
