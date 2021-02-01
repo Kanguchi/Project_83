@@ -36,8 +36,8 @@ export default class HomeScreen extends Component{
           <TouchableOpacity style={styles.button}
           onPress={()=>{
             this.props.navigation.navigate("ReceiverDetails",{"details": item})
-            console.log("this are items ",item.username)}}>
-              <Text style={{color:'#ffff'}}>Exchange</Text>
+            }}>
+              <Text style={{color:'#ffff'}}>View</Text>
           </TouchableOpacity>
         </ListItem.Content>
       </ListItem>
